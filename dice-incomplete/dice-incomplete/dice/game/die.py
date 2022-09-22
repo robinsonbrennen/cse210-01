@@ -5,7 +5,7 @@ import random
 
 # 1) Add the class declaration. Use the following class comment.
 
-class die:
+class Die:
 
     """A small cube with a different number of spots on each of its six sides.
 

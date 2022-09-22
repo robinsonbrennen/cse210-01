@@ -38,7 +38,6 @@ class Director:
             self.get_inputs()
             self.do_updates()
             self.do_outputs()
-            self.score = 0
 
     def get_inputs(self):
         """Ask the user if they want to roll.
