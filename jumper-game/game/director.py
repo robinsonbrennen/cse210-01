@@ -32,35 +32,29 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+
         while self._is_playing:
+            self._do_outputs()
             self._get_inputs()
             self._do_updates()
-            self._do_outputs()
+            # self._is_playing = False
 
     def _get_inputs(self):
-        """Moves the seeker to a new location.
-
-        Args:
+        """ Args:
             self (Director): An instance of Director.
         """
         guess_letter = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
-        #self._seeker.move_location(new_location)
+        self._puzzle.process_guess(guess_letter)
         
     def _do_updates(self):
-        """Keeps watch on where the seeker is moving.
-
-        Args:
+        """ Args:
             self (Director): An instance of Director.
         """
-        self._hider.watch_seeker(self._seeker)
+        pass
         
     def _do_outputs(self):
-        """Provides a hint for the seeker to use.
-
-        Args:
+        """ Args:
             self (Director): An instance of Director.
         """
-        hint = self._hider.get_hint()
-        self._terminal_service.write_text(hint)
-        if self._hider.is_found():
-            self._is_playing = False
+        self._puzzle._select_word()
+        self._jumper._draw_jumper()
