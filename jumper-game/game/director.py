@@ -1,6 +1,6 @@
 from game.terminal_service import TerminalService
-from game.hider import Hider
-from game.seeker import Seeker
+from game.jumper import Jumper
+from game.puzzle import Puzzle
 
 
 class Director:
@@ -9,9 +9,9 @@ class Director:
     The responsibility of a Director is to control the sequence of play.
 
     Attributes:
-        hider (Hider): The game's hider.
+        jumper (Jumper): Creates the jumper, removes a line, checks for remaining parachute.
         is_playing (boolean): Whether or not to keep playing.
-        seeker (Seeker): The game's seeker.
+        puzzle (Puzzle): Creates the puzzle, manages guesses.
         terminal_service: For getting and displaying information on the terminal.
     """
 
@@ -21,9 +21,9 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self._hider = Hider()
+        self._puzzle = Puzzle()
         self._is_playing = True
-        self._seeker = Seeker()
+        self._jumper = Jumper()
         self._terminal_service = TerminalService()
         
     def start_game(self):
@@ -43,8 +43,8 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        new_location = self._terminal_service.read_number("\nEnter a location [1-1000]: ")
-        self._seeker.move_location(new_location)
+        guess_letter = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
+        #self._seeker.move_location(new_location)
         
     def _do_updates(self):
         """Keeps watch on where the seeker is moving.
