@@ -37,7 +37,7 @@ class Director:
             self._do_outputs()
             self._get_inputs()
             self._do_updates()
-            self._is_playing = False
+            # self._is_playing = False
 
             
     def _do_outputs(self):
