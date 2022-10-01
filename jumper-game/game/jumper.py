@@ -1,4 +1,4 @@
-
+from game.terminal_service import TerminalService
 from game.terminal_service import TerminalService
 
 

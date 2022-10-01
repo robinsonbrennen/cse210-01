@@ -37,7 +37,15 @@ class Director:
             self._do_outputs()
             self._get_inputs()
             self._do_updates()
-            # self._is_playing = False
+            self._is_playing = False
+
+            
+    def _do_outputs(self):
+        """ Args:
+            self (Director): An instance of Director.
+        """
+        self._puzzle._select_word()
+        self._jumper._draw_jumper()
 
     def _get_inputs(self):
         """ Args:
@@ -51,10 +59,3 @@ class Director:
             self (Director): An instance of Director.
         """
         pass
-        
-    def _do_outputs(self):
-        """ Args:
-            self (Director): An instance of Director.
-        """
-        self._puzzle._select_word()
-        self._jumper._draw_jumper()
