@@ -4,58 +4,35 @@ from game.puzzle import Puzzle
 
 
 class Director:
-    """A person who directs the game. 
-    
-    The responsibility of a Director is to control the sequence of play.
-
-    Attributes:
-        jumper (Jumper): Creates the jumper, removes a line, checks for remaining parachute.
-        is_playing (boolean): Whether or not to keep playing.
-        puzzle (Puzzle): Creates the puzzle, manages guesses.
-        terminal_service: For getting and displaying information on the terminal.
-    """
 
     def __init__(self):
-        """Constructs a new Director.
-        
-        Args:
-            self (Director): an instance of Director.
-        """
+
         self._puzzle = Puzzle()
         self._is_playing = True
         self._jumper = Jumper()
         self._terminal_service = TerminalService()
         
-    def start_game(self):
-        """Starts the game by running the main game loop.
-        
-        Args:
-            self (Director): an instance of Director.
-        """
-
-        while self._is_playing:
-            self._do_outputs()
-            self._get_inputs()
-            self._do_updates()
-            # self._is_playing = False
-
-            
-    def _do_outputs(self):
-        """ Args:
-            self (Director): An instance of Director.
-        """
-        self._puzzle._select_word()
-        self._jumper._draw_jumper()
+    def _display(self):
+        self._puzzle.display_puzzle()
+        self._jumper.display_jumper()
 
     def _get_inputs(self):
-        """ Args:
-            self (Director): An instance of Director.
-        """
-        guess_letter = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
-        self._puzzle.process_guess(guess_letter)
-        
+        self.letter = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
+                    
     def _do_updates(self):
-        """ Args:
-            self (Director): An instance of Director.
-        """
-        pass
+        self.correct_guess = self._puzzle.process_guess(self.letter)
+
+        if self.correct_guess == False:
+            self._jumper._remove_line()
+
+            if self._jumper.has_parachute() == False:
+                self._is_playing = False
+                self._jumper.last_life()
+
+        if self._puzzle.can_keep_guessing() == False:
+            self._is_playing = False
+
+    def _do_outputs(self):
+        if self._puzzle.can_keep_guessing == False:
+            print ("Congratulations you guessed the word!")
+            self._is_playing = False

@@ -28,3 +28,12 @@ class Jumper:
 #be able to remove a piece of itself when incorrect guess occurs = single line
     def _remove_line(self):
         self._jumper.pop(0)
+
+
+#
+    # def _remaining_parachute(self):
+    #     pass
+
+
+    # def _place_x(self):
+    #     pass
