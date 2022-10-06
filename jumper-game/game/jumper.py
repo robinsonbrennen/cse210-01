@@ -31,9 +31,8 @@ class Jumper:
 
     
 
-    def has_parachute(self):
-        if self._jumper == False:
-            pass
+    # def has_parachute(self):
+        
 
 
     # def _place_x(self):
