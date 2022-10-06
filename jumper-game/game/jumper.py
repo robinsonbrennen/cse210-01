@@ -21,7 +21,7 @@ class Jumper:
         ]
 
 #draw itself
-    def _draw_jumper(self):
+    def display_jumper(self):
         for line in self._jumper:
             self.terminalservice.write_text(line)
 
@@ -29,10 +29,11 @@ class Jumper:
     def _remove_line(self):
         self._jumper.pop(0)
 
+    
 
-#
-    # def _remaining_parachute(self):
-    #     pass
+    def has_parachute(self):
+        if self._jumper == False:
+            pass
 
 
     # def _place_x(self):

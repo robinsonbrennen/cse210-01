@@ -13,7 +13,6 @@ class Puzzle:
         self._word_guess = ["_ "] * len(self._word)
         self.terminalservice = TerminalService()
 
-
     def display_puzzle(self):
         self.terminalservice.write_text(self._word_guess)
 
